@@ -6,15 +6,92 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import About from './components/About'
 import {motion,MotionConfig} from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
 
 function App() {
 
-  const about=useRef()
-  const experience=useRef()
-  const projects=useRef()
-  const contact=useRef()
-  const navigate=useNavigate()
+  const about=useRef(null)
+  const experience=useRef(null)
+  const projects=useRef(null)
+  const contact=useRef(null)
+
+
+
+  const [activeSection, setActiveSection] = useState(null);
+
+  const sectionRefs = {
+    about: useRef(null),
+    experience:useRef(null),
+    projects: useRef(null),
+    contact: useRef(null)
+  };
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.7, // Adjust this threshold as needed
+    };
+
+    const callback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Entry is in the viewport
+          
+          setActiveSection(entry.target.id);
+          
+          if(entry.target.id==="about")
+          {
+            if(about)
+            {
+              classAdder(about)
+
+            }
+          }
+          else if(entry.target.id==="experience")
+          {
+            if(experience)
+            {
+              classAdder(experience)
+
+            }
+          }
+          else if(entry.target.id==="projects")
+          {
+            if(projects)
+            {
+              classAdder(projects)
+
+            }
+          }
+          else if(entry.target.id==="contact")
+          {
+            if(contact)
+            {
+              classAdder(contact)
+
+            }
+          }
+
+          // console.log("idx",entry)
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, options);
+
+    // Observe the section elements
+    Object.values(sectionRefs).forEach((ref) => {
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+    });
+
+    return () => {
+      // Clean up the observer when the component unmounts
+      observer.disconnect();
+    };
+  }, []);
+
 
   const [mousePos,setMousePos]=useState({
     x:0,
@@ -127,7 +204,7 @@ animate="default"
 
                   <div className='item my-lg-4 active addMouseEffect' onClick={()=>{classAdder(about)}} ref={about}>
                  
-                 <ScrollIntoView selector="#footer1" >
+                 <ScrollIntoView selector="#about" >
                    <div >ABOUT</div>
                  </ScrollIntoView>
 
@@ -136,7 +213,7 @@ animate="default"
                   <div className='item my-lg-4 addMouseEffect' ref={experience} onClick={()=>{classAdder(experience)}}>
 
 
-                  <ScrollIntoView selector="#footer2">
+                  <ScrollIntoView selector="#experience">
                   <div>EXPERIENCE</div>
 
                  </ScrollIntoView>
@@ -144,7 +221,7 @@ animate="default"
                   </div>
 
                   <div className='item my-lg-4 addMouseEffect' ref={projects} onClick={()=>{classAdder(projects)}}>
-                  <ScrollIntoView selector="#footer3">
+                  <ScrollIntoView selector="#projects">
                   <div>PROJECTS</div>
 
                  </ScrollIntoView>
@@ -152,7 +229,7 @@ animate="default"
                   </div >
 
                   <div className='item my-lg-4 addMouseEffect' ref={contact} onClick={()=>{classAdder(contact)}}>
-                  <ScrollIntoView selector="#footer4">
+                  <ScrollIntoView selector="#contact">
                   <div>CONTACT</div>
 
                  </ScrollIntoView>
@@ -195,21 +272,21 @@ animate="default"
 
       <div className="MainRight col-lg-6" style={{ padding:"0px" ,textAlign: "justify"}}>
 
-      <div style={{ textAlign: "justify" }} id="footer1" className='para'>
+      <div style={{ textAlign: "justify" }} id="about" className='para' ref={sectionRefs.about} >
            <About/>
       </div>
 
-        <div style={{ textAlign: "justify" }} id="footer2" className='para'>
+        <div style={{ textAlign: "justify" }} id="experience" className='para' ref={sectionRefs.experience} >
 
           <Experience />
 
         </div>
 
-        <div  id="footer3" className='para'>
+        <div  id="projects" className='para' ref={sectionRefs.projects} >
           <Projects/>
         </div>
 
-        <div style={{ border: '2px solid rgb(100, 225, 225)' ,textAlign: "justify"}}  id="footer4" className='para'>
+        <div style={{ border: '2px solid rgb(100, 225, 225)' ,textAlign: "justify"}}  id="contact" className='para' ref={sectionRefs.contact}>
           <Contact />
           
 

@@ -6,7 +6,6 @@ body{
   overflow-x: hidden;
   background-color:rgb(15 23 42);
   color:white;
-
   font-family: 'Inter';
 
 }
@@ -183,7 +182,7 @@ body{
 
 
 .leftMainResp{
-  top:100px;
+  top:80px;
   display:flex;
   justify-content:center;
   flex-direction:column;
@@ -295,6 +294,7 @@ body{
 
 
 }
+
 
 
 
