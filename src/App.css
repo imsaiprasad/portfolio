@@ -293,6 +293,35 @@ body{
 
 
 
+
+
+}
+
+
+@media screen and (max-width: 420px)
+{
+  .makesmall{
+    font-size: medium;
+  }
+
+  .skill2{
+    border: 1px solid rgb(24, 62, 62);
+    color: rgb(100, 225, 225);
+    
+    width: 50px;
+    padding: 1px 1px;
+    margin: 5px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 10px;
+  } 
+
+  .mobileviewfont{
+    font-size: 10px;
+
+  }
+
+  
 }
 
 

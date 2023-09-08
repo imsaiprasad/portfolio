@@ -53,7 +53,7 @@ const Projects = () => {
               <div style={{display:"flex"}} className='projectTitle' >
 
                 <a href={project.ProjectLink}  target='/blank'>
-                  <p > {project.title} </p>
+                  <p className='makesmall'> {project.title} </p>
                 </a>
 
                 <svg

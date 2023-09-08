@@ -16,7 +16,6 @@ function App() {
 
 
 
-  const [activeSection, setActiveSection] = useState(null);
 
   const sectionRefs = {
     about: useRef(null),
@@ -37,7 +36,6 @@ function App() {
         if (entry.isIntersecting) {
           // Entry is in the viewport
           
-          setActiveSection(entry.target.id);
           
           if(entry.target.id==="about")
           {
@@ -72,7 +70,6 @@ function App() {
             }
           }
 
-          // console.log("idx",entry)
         }
       });
     };

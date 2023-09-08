@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useLocation,useNavigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
-import {motion} from 'framer-motion'
+import {motion,MotionConfig} from 'framer-motion'
 
 
 
@@ -74,12 +74,14 @@ const FullProjects = () => {
   return (
     <div className='fullProjectBody'>
 
+<MotionConfig transition={{ duration: 0 }}>
 <motion.div className='cursor' 
 
-      variants={variants}
-      animate="default"
-      
-      />
+variants={variants}
+animate="default"
+
+/>
+  </MotionConfig>
 
         <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}  >
             <div className='mt-5' style={{width: "80%"}}>
@@ -114,9 +116,9 @@ const FullProjects = () => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row" style={{color:"white"}} >
-                {row.year}
+               <p className='mobileviewfont'> {row.year} </p> 
               </TableCell>
-              <TableCell align="left" style={{color:"white"}}>{row.title}</TableCell>
+              <TableCell align="left" style={{color:"white"}}><p className='mobileviewfont'>{row.title}</p></TableCell>
               <TableCell align="left" style={{color:"white"}}>
 
               <div style={{display:"flex"}} className='row'>
@@ -143,7 +145,7 @@ const FullProjects = () => {
               <TableCell align="left" style={{color:"white"}}>
                 
                 <div className='fullProjectLink'>
-                <a href={row.ProjectLink}  >Visit Project</a>
+                <a href={row.ProjectLink} className='mobileviewfont' >Visit Project</a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
